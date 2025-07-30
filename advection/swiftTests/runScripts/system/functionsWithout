@@ -20,7 +20,7 @@ FoamFile
     fields=(T),
     FCTiters=(NFCT),
     FCTlimits=(()),
-    advectingFlux=phi,
+    advectingFlux=phiv,
     massFlux=none,
     RK_ButcherCoeffs=RKCOEFFS,
     gammaCoeffs=(CCRIT CGRAD),

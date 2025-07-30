@@ -15,11 +15,9 @@ mkdir -p $root/plots
 # Collect error norms in one file for each Courant number to plot
 inputFiles=()
 for case in $root/c05 \
-            $root/c08 \
-            $root/c1p4 \
+            $root/c1 \
             $root/c2 \
-            $root/c5p1 \
-            $root/c10; do
+            $root/c5 ; do
     mkdir -p $case/plots
     c=`filename $case`
     echo "#dx l1 l2 linf normMass normVar" > $case/plots/${var}errorNorms.dat
@@ -34,30 +32,31 @@ for case in $root/c05 \
 done
 
 mkdir -p plots
-echo -e "#dx error\n0.01 1e-5\n0.1 .01" > plots/3rdOrder.dat
-echo -e "#dx error\n0.01 1e-4\n0.1 .01" > plots/2ndOrder.dat
-echo -e "#dx error\n0.01 1e-3\n0.1 .01" > plots/1stOrder.dat
+echo -e "#dx error\n0.05 1\n0.005 .1" > plots/1stOrder.dat
+echo -e "#dx error\n0.05 0.1\n0.005 .001" > plots/2ndOrder.dat
+echo -e "#dx error\n0.05 1e-3\n0.005 1e-6" > plots/3rdOrder.dat
+echo -e "#dx error\n0.05 1e-4\n0.005 1e-8" > plots/4thOrder.dat
 
-inputFiles=(${inputFiles[*]} \
+inputFiles=(${inputFiles[*]} plots/4thOrder.dat\
             plots/3rdOrder.dat  plots/2ndOrder.dat  plots/1stOrder.dat)
-col=(3 3 3 3 3 3  2 2 2)
+col=(3 3 3 3  2 2 2 2)
 colx=1
-legends=("c = 0.5" "c = 0.8" "c = 1.4" "c = 2" "c = 5.1"
-          "c = 10" "1st/2nd/3rd" "" "")
-pens=("black" "blue" "red" "green" "cyan" "magenta" 
+legends=("c = 0.5" "c = 1" "c = 2" "c = 5.1" "1st/2nd/3rd/4th" "" "")
+pens=("black" "blue" "red" "green"  "0.25,black,1_4:0"
       "0.25,black,1_4:0" "0.25,black,1_4:0" "0.25,black,1_4:0")
-symbols=("x10p" "c10p" "a10p"
-         "+10p" "t10p" "h10p"   "" "" "")
+symbols=("x7p" "c7p" "+7p" "s7p"
+           "" "" "" "")
+#         "+10p" "t10p" "h10p"
 #spens=("black" "blue" "red" "green" "cyan" "magenta" "" "" "")
 xlabel='@~D@~x'
 ylabel=''
-xmin=0.004
-xmax=0.1
-dx=10
-ddx=2
+xmin=0.003
+xmax=0.05
+dx=2
+ddx=1
 dxg=10
-ymin=1e-6
-ymax=0.2
+ymin=1e-8
+ymax=1
 dy=10
 ddy=1
 dyg=10
